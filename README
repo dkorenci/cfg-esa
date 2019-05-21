@@ -1,5 +1,5 @@
-This is cfg_esa - program implementig the algorithm for longest first 
-context free grammar compression using enhanced suffix array described in the article:
+This is cfg_esa - text compression tool using an algorithm for longest first  
+context free grammar compression based on enhanced suffix array, described in the article:
 Ristov, S and Korenčić, D., “Using Static Suffix Array in Dynamic Application: 
 Case of Text Compression by Longest First Substitution”, 
 Information Processing Letters, DOI 10.1016/j.ipl.2014.08.014
