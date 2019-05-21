@@ -1,0 +1,39 @@
+This is cfg_esa - program implementig the algorithm for longest first 
+context free grammar compression using enhanced suffix array described in the article:
+Ristov, S and Korenčić, D., “Using Static Suffix Array in Dynamic Application: 
+Case of Text Compression by Longest First Substitution”, 
+Information Processing Letters, DOI 10.1016/j.ipl.2014.08.014
+
+Copyright (C) 2014-2015 Damir Korencic
+
+cfg_esa is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+The code in SaIsCreator.hpp is modified code from taken from the text of the article:
+Two Efficient Algorithms for Linear Time Suffix Array Construction, by Ge Nong, Sen Zhang, and Wai Hong Chan
+Authors version is available online under MIT licence at: http://code.google.com/p/ge-nong/
+
+cfg_esa is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+
+*** Usage:
+
+"make" produces cfg_esa executable
+use "make clean" to clean the build
+
+Running cfg_esa with no parameters will print help message with usage instructions.
+
+The output of the compression consists of all the rules of the compressed grammar 
+and the first rule R0 corresponds to the entire string (line [R0]:string).
+If the input string is read from a file, use -w option to ignore whitespaces, 
+otherwise newlines and other whitespace chars will be included in the string.
+
+scripts/ folder contains bash scripts that can be used for testing, 
+usage of the scripts is documented in the code comments
+
+Test cases can be found in: src/test/tests.txt

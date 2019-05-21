@@ -1,0 +1,150 @@
+// grammars are correct output if lcp intervals are traversed in 
+// alphabetic order, shortened lists are processed after 
+// lcp intervals of corresponding length and new shortened lists
+// are added the the end of the list
+
+// number of examples
+14
+
+// example 1 simple
+aabbaabb
+2
+[R0]:[R1][R1]
+[R1]:aabb
+
+// example 2
+aaaabbaaaabbaaaa
+4
+[R0]:[R2][R1][R1]
+[R1]:bb[R2]
+[R2]:[R3][R3]
+[R3]:aa
+
+// example 3
+aaaaaaaaaaaaaaaabaa
+4
+[R0]:[R1][R1]b[R3]
+[R1]:[R2][R2]
+[R2]:[R3][R3]
+[R3]:aa
+
+// example 4
+// 32 a's -> recursive splitting into two identical subrules, lot of prefix rules
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+5
+[R0]:[R1][R1]
+[R1]:[R2][R2]
+[R2]:[R3][R3]
+[R3]:[R4][R4]
+[R4]:aa
+
+// example 5
+// shortening of positions to identical length
+abcdefgxcdefgyabcdhijucdhij
+5
+[R0]:[R4][R1]x[R1]y[R4][R2]u[R2]
+[R1]:[R3]efg
+[R2]:[R3]hij
+[R3]:cd
+[R4]:ab
+
+// example 6
+// shortening of positions to different length
+abcdexxxxxoabcdeyyyypabcdezzzqexxxxxrdeyyyyscdezzz
+9
+[R0]:[R4]d[R3]o[R4][R2]p[R8][R1]q[R3]r[R2]s[R1]
+[R1]:c[R5]zzz
+[R2]:[R5][R7][R7]
+[R3]:e[R6][R6]x
+[R4]:[R8]c
+[R5]:de
+[R6]:xx
+[R7]:yy
+[R8]:ab
+
+// example 7
+// rule aaaa is recorded purely as prefix_rule, no subst_table entries
+// it has further subrules
+aaaabbxaaaabbyaaaaccxaaaaccy
+5
+[R0]:[R1]x[R1]y[R2]x[R2]y
+[R1]:[R3]bb
+[R2]:[R3]cc
+[R3]:[R4][R4]
+[R4]:aa
+
+// example 8
+abcabdfabcabghabcab
+3
+[R0]:[R1]df[R1]gh[R1]
+[R1]:[R2]c[R2]
+[R2]:ab
+
+// example 9
+abcdefabcabdefdeabcdefabcabdefde
+6
+[R0]:[R1][R1]
+[R1]:[R2][R3][R2][R4][R3][R5]
+[R2]:[R4]c
+[R3]:[R5]f
+[R4]:ab
+[R5]:de
+
+// example 10
+// interval with one shortened position that must be 
+// replaced with unshortened position
+abcdefghAdefghBabcdCabcd
+4
+[R0]:[R3][R1]A[R1]B[R2]C[R2]
+[R1]:defgh
+[R2]:[R3]d
+[R3]:abc
+
+
+// example 11
+// interval with one shortened position that occurs in more than one interval
+abcdeAfgabcdeBfgabCfgabDfgaE
+5
+[R0]:[R1]A[R4][R1]B[R2]C[R2]D[R3]E
+[R1]:abcde
+[R2]:[R3]b
+[R3]:[R4]a
+[R4]:fg
+
+// example 12
+// similar to example 10
+abcdefghijAdefghijBabcdefCabcdefDabcdeEabcde
+6
+[R0]:[R4][R1]A[R1]B[R2]C[R2]D[R3]E[R3]
+[R1]:[R5]fghij
+[R2]:[R3]f
+[R3]:[R4][R5]
+[R4]:abc
+[R5]:de
+
+// example 13
+// 2 sequences of 16 a's occurring within distinct superrules
+xaaaaaaaaaaaaaaaayAxaaaaaaaaaaaaaaaayBuaaaaaaaaaaaaaaaavCuaaaaaaaaaaaaaaaav
+7
+[R0]:[R2]A[R2]B[R1]C[R1]
+[R1]:u[R3]v
+[R2]:x[R3]y
+[R3]:[R4][R4]
+[R4]:[R5][R5]
+[R5]:[R6][R6]
+[R6]:aa
+
+// example 14
+// shortened positions replacements have to be written at both
+// deep positions of sequence abcd
+ppabcdqqAppabcdqqBrrabcdssCrrabcdssDabcdxyzuEdxyzuFabcduvwGcduvw
+8
+[R0]:[R1]A[R1]B[R2]C[R2]D[R6][R4]E[R4]F[R7][R3]G[R3]
+[R1]:pp[R5]qq
+[R2]:rr[R5]ss
+[R3]:cduvw
+[R4]:dxyzu
+[R5]:[R6]d
+[R6]:[R7]c
+[R7]:ab
+
